@@ -10,7 +10,7 @@
     "icons": "node tools/gen-icons.js",
     "test:epub": "node tools/gen-test-epub.js"
   },
-  "optionalDependencies": {
+  "dependencies": {
     "ws": "^8.18.0"
   },
   "engines": {
