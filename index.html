@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="pt-BR" class="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>VoxReader — Leitor de e-Pub com Audiobook IA</title>
+  <meta name="description" content="Leia seus e-Pubs e ouça como audiobook com vozes neurais hiper-realistas. Cache local inteligente, funciona offline.">
+  <meta name="theme-color" content="#0b1120">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icons/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="./icons/icon-180.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="VoxReader">
+
+  <script src="./vendor/tailwind.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { serif: ['Georgia', 'Cambria', 'Times New Roman', 'serif'] } } },
+    };
+  </script>
+
+  <style>
+    :root { color-scheme: dark; }
+    html.light { color-scheme: light; }
+    html, body { background: #0f172a; }
+    html.light body { background: #f1f5f9; }
+    html.light #reader-content { background: #ffffff; border-color: #cbd5e1; }
+    html.light #reader-content .seg { color: #334155; }
+    html.light #reader-content .seg.active { color: #1e293b; }
+    html.light #reader-content mark { background: rgba(99,102,241,.25); color: #312e81; }
+    #reader-content .seg.active { background: rgba(99,102,241,.1); }
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: #47556980; border-radius: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-200 antialiased">
+  <div id="app"></div>
+
+  <!-- Vendors clássicos (globals): JSZip, localforage, epub.js -->
+  <script src="./vendor/jszip.min.js"></script>
+  <script src="./vendor/localforage.min.js"></script>
+  <script src="./vendor/epub.min.js"></script>
+
+  <script type="module" src="./src/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Sintaxe de todos os módulos
+        run: |
+          for f in src/app.js src/services/*.js server.js sw.js tools/*.js test/*.js; do
+            node --check "$f"
+          done
+      - name: Instalar deps (ws para a bridge)
+        run: npm install --no-audit --no-fund
+      - name: Testes unitários
+        run: npm test
+      - name: Servidor sobe e responde
+        run: |
+          node server.js &
+          sleep 1.5
+          curl -sf http://localhost:8080/ > /dev/null
+          curl -sf http://localhost:8080/manifest.json > /dev/null
+          curl -sf http://localhost:8080/sw.js > /dev/null
+          curl -sf http://localhost:8080/icons/icon-192.png > /dev/null
+          # Entradas inválidas precisam responder 4xx sem derrubar o processo.
+          test "$(curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/%zz)" = "400"
+          test "$(curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:8080/api/tts -H 'Content-Type: application/json' -d '{"text":""}')" = "400"
+          # /api/tts real depende da rede do Edge: não faz parte do gate de CI.
+          curl -sf http://localhost:8080/api/health | grep -q '"ok":true'

@@ -1,0 +1,28 @@
+# Dependências (ws é opcional: só acelera a bridge /api/tts)
+node_modules/
+
+# Logs e artefatos de execução local
+*.log
+server.log
+npm-debug.log*
+
+# Temporários gerados por testes/manuais
+test/*.mp3
+test/*.txt
+test/probe*.mp3
+test/headers.txt
+*.tmp
+*.bak
+
+# Ambiente local
+.env
+.env.local
+.DS_Store
+Thumbs.db
+
+# Builds / editores
+dist/
+build/
+.cache/
+.vscode/
+.idea/
