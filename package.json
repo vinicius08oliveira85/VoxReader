@@ -1,17 +1,39 @@
 {
   "name": "voxreader",
-  "version": "1.0.0",
-  "description": "Leitor de e-Pub PWA com conversão para audiobook (Edge TTS + Gemini + Web Speech), cache IndexedDB e modo offline.",
+  "version": "2.0.0",
+  "description": "Leitor de e-Pub PWA com conversão para audiobook com vozes neurais IA (Gemini, Kokoro, Edge TTS)",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
-    "test": "node --test \"test/*.test.js\"",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "start": "vite preview",
     "icons": "node tools/gen-icons.js",
+    "test": "node --test \"test/*.test.js\"",
     "test:epub": "node tools/gen-test-epub.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.15.0",
+    "@xenova/transformers": "^2.17.2",
+    "epubjs": "^0.3.93",
+    "idb": "^8.0.0",
+    "kokoro-js": "^1.0.0",
+    "localforage": "^1.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
+    "vite-plugin-pwa": "^0.20.0",
+    "workbox-cli": "^7.1.0"
   },
   "engines": {
     "node": ">=22"
